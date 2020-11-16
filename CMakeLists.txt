@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(pointcloud_registration)
 
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED COMPONENTS roscpp pcl_conversions)
 find_package(PCL REQUIRED)
 
 include_directories(${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/include)

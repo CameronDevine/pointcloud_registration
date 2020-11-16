@@ -113,7 +113,7 @@ namespace pcl
           //for( std::vector<int>::iterator it = this->indices_->begin(); it != this->indices_->end(); ++it)
           {
             // Use radius search to look for neighbors within a user specified radius
-            if (!searchForNeighbors (output, idx, radius_, max_nn_, nn_indices, nn_dists))
+            if (!this->searchForNeighbors (output, idx, radius_, max_nn_, nn_indices, nn_dists))
             {
               //ROS_INFO("No neigbor found for idx = %d", (int) idx);
               continue;

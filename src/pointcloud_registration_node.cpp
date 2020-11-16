@@ -43,6 +43,7 @@
 #include <pointcloud_registration/pointcloud_registration_point_types.h>
 #include <pcl/io/pcd_io.h>
 #include <Eigen/SVD>
+#include <pcl_conversions/pcl_conversions.h>
 
 #include "pcl/filters/statistical_outlier_removal.h" // to filter outliers
 
@@ -172,31 +173,34 @@ Eigen::Matrix4f PointCloudRegistration::getOverlapTransformation()
 
 void PointCloudRegistration::publishPointCloud(pcl::PointCloud<pcl::PointNormal> &pointcloud)
 {
-  sensor_msgs::PointCloud2 mycloud;
-  pcl::toROSMsg(pointcloud, mycloud);
+  pcl::PCLPointCloud2 pointcloud2;
 
   if( downsample_pointcloud_after_ == true)
   {
     // for downsampling of pointclouds
-    pcl::VoxelGrid<sensor_msgs::PointCloud2> sor_;
-    sensor_msgs::PointCloud2 mycloud_downsampled;
+    pcl::VoxelGrid<pcl::PointNormal> sor_;
+    pcl::PointCloud<pcl::PointNormal>::Ptr mycloud_downsampled(new pcl::PointCloud<pcl::PointNormal>);
+    // pcl::PointCloud<pcl::PointNormal> mycloud_downsampled;
 
     //Now we will downsample the point cloud
-    sor_.setInputCloud (boost::make_shared<sensor_msgs::PointCloud2> (mycloud));
+    sor_.setInputCloud (boost::make_shared<pcl::PointCloud<pcl::PointNormal>> (pointcloud));
     sor_.setLeafSize (downsample_leafsize_, downsample_leafsize_, downsample_leafsize_);
-    sor_.filter (mycloud_downsampled);
-    mycloud_downsampled.header.frame_id = frame_id_;
-    mycloud_downsampled.header.stamp = ros::Time::now();
+    sor_.filter (*mycloud_downsampled);
 
-    pointcloud_merged_publisher_.publish(mycloud_downsampled);
+    pcl::toPCLPointCloud2(*mycloud_downsampled, pointcloud2);
   }
   else
   {
-    mycloud.header.frame_id = frame_id_;
-    mycloud.header.stamp = ros::Time::now();
-
-    pointcloud_merged_publisher_.publish(mycloud);
+    pcl::toPCLPointCloud2(pointcloud, pointcloud2);
   }
+  sensor_msgs::PointCloud2 my_cloud;
+  pcl_conversions::fromPCL(pointcloud2, my_cloud);
+
+  my_cloud.header.frame_id = frame_id_;
+  my_cloud.header.stamp = ros::Time::now();
+
+  pointcloud_merged_publisher_.publish(my_cloud);
+
   ROS_INFO("[PointCloudRegistration:] Merged Point cloud published");
 }
 
