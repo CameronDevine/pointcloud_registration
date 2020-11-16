@@ -1,0 +1,12 @@
+<package>
+ <name>pointcloud_registration</name>
+ <version>0.1.0</version>
+ <description>A package implementing registration of point clouds along with other features.</description>
+ <author>Hozefa Indorewala</author>
+ <license>BSD</license>
+ <maintainer email="camerondtrain@gmail.com"/>
+ <buildtool_depend>catkin</buildtool_depend>
+ <build_depend>libpcl-all-dev</build_depend>
+ <run_depend>libpcl-all</run_depend>
+ <build_depend>perception_pcl</build_depend>
+</package>
