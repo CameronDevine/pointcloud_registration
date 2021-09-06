@@ -123,14 +123,14 @@ namespace pcl
               // Check if the difference between the z coordinates is within user specified limits
               if(fabs(output.points[idx].z - this->target_->points[nn_indices[i]].z) < epsilon_z_ && field_ == "z")
               {
-                if(curvature_check_)
-                {
-                  // Check if the difference between the curvature values is within user specified limits
-                  if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
-                  {
-                    continue;
-                  }
-                }
+                // if(curvature_check_)
+                // {
+                //   // Check if the difference between the curvature values is within user specified limits
+                //   if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
+                //   {
+                //     continue;
+                //   }
+                // }
                 count++;
                 source_corresp.points.push_back (output.points[idx]);
                 model_corresp.points.push_back (this->target_->points[nn_indices[i]]);
@@ -138,14 +138,14 @@ namespace pcl
               }
               else if(fabs(output.points[idx].y - this->target_->points[nn_indices[i]].y) < epsilon_z_ && field_ == "y")
               {
-                if(curvature_check_)
-                {
-                  // Check if the difference between the curvature values is within user specified limits
-                  if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
-                  {
-                    continue;
-                  }
-                }
+                // if(curvature_check_)
+                // {
+                //   // Check if the difference between the curvature values is within user specified limits
+                //   if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
+                //   {
+                //     continue;
+                //   }
+                // }
                 count++;
                 source_corresp.points.push_back (output.points[idx]);
                 model_corresp.points.push_back (this->target_->points[nn_indices[i]]);
@@ -153,14 +153,14 @@ namespace pcl
               }
               else if(fabs(output.points[idx].x - this->target_->points[nn_indices[i]].x) < epsilon_z_ && field_ == "x")
               {
-                if(curvature_check_)
-                {
-                  // Check if the difference between the curvature values is within user specified limits
-                  if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
-                  {
-                    continue;
-                  }
-                }
+                // if(curvature_check_)
+                // {
+                //   // Check if the difference between the curvature values is within user specified limits
+                //   if(fabs(output.points[idx].curvature - this->target_->points[nn_indices[i]].curvature) > epsilon_curvature_)
+                //   {
+                //     continue;
+                //   }
+                // }
                 count++;
                 source_corresp.points.push_back (output.points[idx]);
                 model_corresp.points.push_back (this->target_->points[nn_indices[i]]);
